@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Password Generator</title>
+    <style>
+      form {
+        width: 300px;
+        margin: 0 auto;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"] {
+        width: 100%;
+        height: 35px;
+        padding: 0 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        width: 100%;
+        height: 40px;
+        background-color: #333;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+      .password {
+    font-size: 20px;
+    color: #333;
+  }
+    </style>
+  </head>
+  <body>
+    <form id="password-form">
+      <label>Password Length:</label>
+      <input type="text" id="length" name="length">
+      <input type="submit" value="Generate Password">
+    </form>
+    <div id="password-container"></div>
+
+    <script>
+      const form = document.getElementById('password-form');
+      const passwordContainer = document.getElementById('password-container');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const length = form.querySelector('#length').value;
+        const password = generatePassword(length);
+
+        if (password) {
+            passwordContainer.innerHTML = `<p class="password">Your password: ${password}</p>`;
+
+        }
+      });
+
+      function generatePassword(length) {
+        // Check if the length is a valid number
+        if (!length || isNaN(length)) {
+          passwordContainer.innerHTML = '<p>Error: Please enter a valid number</p>';
+          return;
+        }
+
+        // Use the crypto API to generate a random password
+        const crypto = window.crypto || window.msCrypto;
+        const password = new Uint32Array(length /2);
+        crypto.getRandomValues(password);
+        return Array.from(password, dec => ('0' + dec.toString(16)).substr(-2)).join('');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "passwordgenerator",
+  "version": "1.0.0",
+  "description": "Random password generator app using node js ",
+  "main": "gen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nuwan Mataraarachchi",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
+}
